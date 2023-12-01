@@ -130,16 +130,37 @@ test('Child windows handling', async ({ browser }) => {
     const docuLink = page.locator("[href*='documents-request']");
     
     const [newPage] = await Promise.all([
+        //PROMISE ALL await
+        //wait for a new page and for clicking the button to trigger the new page
         context.waitForEvent('page'),
-        docuLink.click(),
+        docuLink.click()
     ]);
     await newPage.waitForLoadState('networkidle');
-    textD = await newPage.locator("p.red").textContent();
-    console.log(textD);
-
-
+    const textD = await newPage.locator("p.red").textContent();
+    const arrayText = textD.split("@");
+    const domain = arrayText[1].split("") [0];
+    console.log("TOTAL TEXT AT LOCATOR > "+ textD);
+    console.log("DOMAIN: " + domain);
 })
- 
+
+
+test('NO TEST Console terminal commands', async ({ page }) => {
+    // npx playwright test tests/UIBasicstests.spec.js --debug
+    // npx playwright test tests/UIBasicstests.spec.js
+ })
+
+
+ test('NO TEST Options for playwright config js', async ({ page }) => {
+    // In order to enforce screenshot on every step add into playwright.config.js
+    // at USE:  screenshot: 'on'
+
+    // In order to enable trace logs
+    // at USE: trace: 'on'
+
+    //If traces are enabled the test result page will provide traces file
+    //This file can be checked via trace.playwright.dev
+
+ })
 
 
 
