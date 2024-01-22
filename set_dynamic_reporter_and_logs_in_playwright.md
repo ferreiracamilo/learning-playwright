@@ -206,6 +206,7 @@ steps:
 
 ### Image samples to showoff result
 ![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/0afd045e-acba-4ed0-86e2-103b47d882f7)
+![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/97033a8b-5133-4330-b1f8-4632d589de12)
 ![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/1fb055f1-986b-4d54-bd73-9ae876740d8d)
 
 
