@@ -210,7 +210,7 @@ steps:
 ![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/1fb055f1-986b-4d54-bd73-9ae876740d8d)
 
 ### How to set POST request
-Bear in mind that within autorization Azure Dev Ops token will be needed to authenticate
+Bear in mind that within autorization Azure Dev Ops token will be needed to authenticate. Even though was explained previously this is meant to provide either a dev team or external service for deployment utilized by your company to execute your pipeline after an update in some environment. Just in case on this example is not provided how to handle ENV property, suggest to browser the internet which is pretty easy to find out because does not apply only to automation testing based on NodeJS frameworks, as well applies for development.
 ![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/f58113fa-c189-448d-b81d-f7151d1e4570)
 
 
