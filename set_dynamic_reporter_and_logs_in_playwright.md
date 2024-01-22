@@ -108,4 +108,10 @@ function setLogs() {
 }
 ```
 
+##File to set pipeline (on my case I applied it to an Azure Pipeline)
+
+```yml
+SELECT User, Host FROM mysql.user;
+```
+
 
