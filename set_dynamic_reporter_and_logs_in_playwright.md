@@ -1,4 +1,4 @@
-#Setting playwright config as traditional way
+# Setting playwright config as traditional way
 Given the reduced sample playwright config file below check out the fact that part of the file that is meant
 - For setting logs (as screenshot, video, etc) are set initially hardcoded
 - For reporter is seing as well hardcoded values
@@ -35,9 +35,9 @@ module.exports = defineConfig({
 });
 ```
 
-#Setting values based on execution type (local or CI/pipeline)
+# Setting values based on execution type (local or CI/pipeline)
 
-##Playwright config tune for dynamic settings
+## Playwright config tune for dynamic settings
 You'll find in file below that at time of setting logs and reporters instead of hardcoded values functions are called. This is just an example more values are possible to be dynamically set and as many variations as you need. Function based on value of a variable that is expected to be load/set during pipeline execution in yml file, this will be shown at the bottom.
 ```javascript
 const { defineConfig, devices } = require('@playwright/test');
@@ -108,7 +108,7 @@ function setLogs() {
 }
 ```
 
-##File to set pipeline (on my case I applied it to an Azure Pipeline)
+## File to set pipeline (on my case I applied it to an Azure Pipeline)
 
 ```yml
 # Starter pipeline
