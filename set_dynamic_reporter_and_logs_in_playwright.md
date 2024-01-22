@@ -209,5 +209,8 @@ steps:
 ![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/97033a8b-5133-4330-b1f8-4632d589de12)
 ![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/1fb055f1-986b-4d54-bd73-9ae876740d8d)
 
+### How to set POST request
+Bear in mind that within autorization Azure Dev Ops token will be needed to authenticate
+![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/f58113fa-c189-448d-b81d-f7151d1e4570)
 
 
