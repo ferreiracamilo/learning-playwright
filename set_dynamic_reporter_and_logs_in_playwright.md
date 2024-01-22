@@ -127,7 +127,7 @@ Below you'll see a brief explanation of what this yml is doing at time of pipeli
   2. Otherwise TAG is loaded with the value received e.g. received from POST request
 8. Publish artifact to attach test-results (images, videos, trace) into build. That means anyone with access to build without having NodeJS, Playwright, etc on their computer are able to see result attachments
 9. Publish artifact to attach HTML report. As previous case team without any configuration done in their PCs are able to see the actual result of the test cases
-10. Populate 
+10. Populate 'Tests' tab results
 
 ```yml
 parameters:
