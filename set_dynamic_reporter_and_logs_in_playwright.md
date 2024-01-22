@@ -111,7 +111,83 @@ function setLogs() {
 ##File to set pipeline (on my case I applied it to an Azure Pipeline)
 
 ```yml
-SELECT User, Host FROM mysql.user;
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+parameters:
+- name: TAGS
+  type: string
+  default: ''
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  TAGS: ${{ parameters.TAGS }}
+  CI: "true"
+
+steps:
+- checkout: self
+  displayName: 'Checkout Repo'
+
+- script: |
+    echo " "
+    echo "######################"
+    echo "### Install NodeJS ###"
+    echo "######################"
+    echo " "
+    npm install
+    echo " "
+    echo "##########################"
+    echo "### Install Playwright ###"
+    echo "##########################"
+    echo " "
+    npx playwright install chromium
+    echo " "
+    echo "##########################################################################################"
+    echo "### Execute test cases only with chromium up to 1 retry and list test cases executions ###"
+    echo "##########################################################################################"
+    echo " "
+    npx playwright test --project=chromium --retries=1
+  displayName: 'Execute Playwright test cases'
+
+- script: |
+    echo "TAGS before: $(TAGS)"
+    if [ -z "${TAGS}" ]; then
+      echo "TAGS is empty. Setting default value."
+      TAGS="repository-update"
+    fi
+    echo "TAGS after: $(TAGS)"
+    echo "##vso[build.addbuildtag]${TAGS}"
+  displayName: 'Set Build Tag'
+
+- task: PublishBuildArtifacts@1
+  condition: succeededOrFailed()
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/test-results'
+    ArtifactName: 'Playwright Trace log files, attachment and videos -if applicable-'
+  displayName: 'Publish Test Results Attachments'
+
+- task: PublishBuildArtifacts@1
+  condition: succeededOrFailed()
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/playwright-report/index.html'
+    ArtifactName: 'Playwright HTML Report'
+  displayName: 'Publish Playwright HTML Report'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/junit-results/results.xml'
+    failTaskOnFailedTests: true
+    testRunTitle: 'Salesforce Playwright Automation'
+  displayName: 'Output JUnit XML Test Results'
 ```
 
 
