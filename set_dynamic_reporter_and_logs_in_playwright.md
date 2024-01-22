@@ -109,6 +109,25 @@ function setLogs() {
 ```
 
 ## File to set pipeline (on my case I applied it to an Azure Pipeline)
+Below you'll see a brief explanation of what this yml is doing at time of pipeline execution
+1. TAG Parameter is created to later tag the build.
+  1. Let's say know beforehand execution is expected after main branch changes but as well from external execution. For external execution I refer a dev team using a POST request to execute our automation testing solution, so we give them the possibility to place a tag to the build which is going to provide easy and simple visibility of the reason of the execution. E.g. dev team is executing our automation due to "TICKET 344 - Add button to forward email", this will be displayed at top of the build in Azure
+2. main branch is triggered
+3. "computer"(image) so is stated
+4. Internal variables are set
+  1. Build TAG is set/assigned which was previously received declared
+  2. CI variable is enforced to TRUE so our expected settings for pipeline execution are in place
+5. Checkout done over main branch which was previously selected
+6. script is executed
+  1. 'npm install' is done so Playwright and any other dependencies are installed
+  2. 'npx playwright install chromium' on this case we are only using one browser at CI execution, so it is the only one installed
+  3.  'npx playwright test --project=chromium --retries=1' test, browser and retry expected are defined
+7. script is executed
+  1. If tag is empty -as expected for main branch update from automation testing team behalf- is default to "repository-update"
+  2. Otherwise TAG is loaded with the value received e.g. received from POST request
+8. Publish artifact to attach test-results (images, videos, trace) into build. That means anyone with access to build without having NodeJS, Playwright, etc on their computer are able to see result attachments
+9. Publish artifact to attach HTML report. As previous case team without any configuration done in their PCs are able to see the actual result of the test cases
+10. Populate 
 
 ```yml
 parameters:
@@ -184,5 +203,8 @@ steps:
     testRunTitle: 'Salesforce Playwright Automation'
   displayName: 'Output JUnit XML Test Results'
 ```
+
+### Image samples to showoff result
+![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/0afd045e-acba-4ed0-86e2-103b47d882f7)
 
 
