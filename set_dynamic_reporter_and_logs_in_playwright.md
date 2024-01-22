@@ -1,4 +1,10 @@
-# Setting playwright config as traditional way
+# Purpose/About
+If you are struggling in order to to setup your project in playwright for pipeline execution and want to fulfill following specs. Feel free to check out this markdown I assembled after some research I did.
+- Define a POST request to call Azure Pipeline to run your Playwright Automation Testing solution and tag the build with a specific message. In this way, the person who remotely executes the pipeline will be able to mention the work item or ticket id by which they want to review the results of the automated tests.
+- Define specific logs for CI and others for local execution
+- Define specific reporters for CI and others for local execution
+
+## Setting playwright config as traditional way
 Given the reduced sample playwright config file below check out the fact that part of the file that is meant
 - For setting logs (as screenshot, video, etc) are set initially hardcoded
 - For reporter is seing as well hardcoded values
@@ -35,9 +41,9 @@ module.exports = defineConfig({
 });
 ```
 
-# Setting values based on execution type (local or CI/pipeline)
+## Setting values based on execution type (local or CI/pipeline)
 
-## Playwright config tune for dynamic settings
+### Playwright config tune for dynamic settings
 You'll find in file below that at time of setting logs and reporters instead of hardcoded values functions are called. This is just an example more values are possible to be dynamically set and as many variations as you need. Function based on value of a variable that is expected to be load/set during pipeline execution in yml file, this will be shown at the bottom.
 ```javascript
 const { defineConfig, devices } = require('@playwright/test');
@@ -108,7 +114,7 @@ function setLogs() {
 }
 ```
 
-## File to set pipeline (on my case I applied it to an Azure Pipeline)
+### File to set pipeline (on my case I applied it to an Azure Pipeline)
 Below you'll see a brief explanation of what this yml is doing at time of pipeline execution
 1. TAG Parameter is created to later tag the build.
   1. Let's say know beforehand execution is expected after main branch changes but as well from external execution. For external execution I refer a dev team using a POST request to execute our automation testing solution, so we give them the possibility to place a tag to the build which is going to provide easy and simple visibility of the reason of the execution. E.g. dev team is executing our automation due to "TICKET 344 - Add button to forward email", this will be displayed at top of the build in Azure
@@ -204,12 +210,12 @@ steps:
   displayName: 'Output JUnit XML Test Results'
 ```
 
-### Image samples to showoff result
+#### Image samples to showoff result
 ![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/0afd045e-acba-4ed0-86e2-103b47d882f7)
 ![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/97033a8b-5133-4330-b1f8-4632d589de12)
 ![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/1fb055f1-986b-4d54-bd73-9ae876740d8d)
 
-### How to set POST request
+#### How to set POST request
 Bear in mind that within autorization Azure Dev Ops token will be needed to authenticate. Even though was explained previously this is meant to provide either a dev team or external service for deployment utilized by your company to execute your pipeline after an update in some environment. Just in case on this example is not provided how to handle ENV property, suggest to browser the internet which is pretty easy to find out because does not apply only to automation testing based on NodeJS frameworks, as well applies for development.
 ![image](https://github.com/ferreiracamilo/learning-playwright/assets/6466791/f58113fa-c189-448d-b81d-f7151d1e4570)
 
