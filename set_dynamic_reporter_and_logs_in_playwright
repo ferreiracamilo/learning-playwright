@@ -1,4 +1,24 @@
 
+
+var editor = EditorJS({
+  ...
+  
+  tools: {
+    ...
+    quote: {
+      class: Quote,
+      inlineToolbar: true,
+      shortcut: 'CMD+SHIFT+O',
+      config: {
+        quotePlaceholder: 'Enter a quote',
+        captionPlaceholder: 'Quote\'s author',
+      },
+    },
+  },
+  
+  ...
+});
+
 ```javascript
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
