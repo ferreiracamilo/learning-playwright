@@ -94,22 +94,18 @@ function setReporter() {
 function setLogs() {
   if (process.env.CI === 'true') {
     // Use at CI execution
-    return [
-      {
+    return{
         trace: 'on-first-retry',
         video: 'on-first-retry',
         screenshot: 'on'
-      }
-    ];
+    };
   } else {
     // Use at local execution
-    return [
-      {
+    return{
         trace: 'retain-on-failure',
         video: 'retain-on-failure',
         screenshot: 'off'
-      }
-    ];
+    };
   }
 }
 ```
